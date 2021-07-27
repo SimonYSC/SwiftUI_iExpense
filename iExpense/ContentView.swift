@@ -23,31 +23,42 @@ import SwiftUI
 //    }
 //}
 
+//struct User {
+//    var firstName: String
+//    var lastName: String
+//}
+
 struct ContentView: View {
 //    @ObservedObject private var user = User()
 //    @State private var showingSheet = false
-    @State private var numbers = [Int]()
-    @State private var currentNumber = 1
+//    @State private var numbers = [Int]()
+//    @State private var currentNumber = 1
+    @State private var tapCount = UserDefaults.standard.integer(forKey: "Tap")
     
     var body: some View {
-        NavigationView {
-            VStack {
-                List {
-                    // onDelete only works on ForEach
-                    ForEach(numbers, id: \.self) {
-                        Text("\($0)")
-                    }
-                    .onDelete(perform: removeRows)
-                }
-                
-                Button("Add Number") {
-                    self.numbers.append(self.currentNumber)
-                    self.currentNumber += 1
-                }
-                .navigationBarItems(leading: EditButton())
-            }
+        Button("Tap count: \(tapCount)") {
+            self.tapCount += 1
+            UserDefaults.standard.set(self.tapCount, forKey: "Tap")
         }
         
+//        NavigationView {
+//            VStack {
+//                List {
+//                    // onDelete only works on ForEach
+//                    ForEach(numbers, id: \.self) {
+//                        Text("\($0)")
+//                    }
+//                    .onDelete(perform: removeRows)
+//                }
+//
+//                Button("Add Number") {
+//                    self.numbers.append(self.currentNumber)
+//                    self.currentNumber += 1
+//                }
+//                .navigationBarItems(leading: EditButton())
+//            }
+//        }
+//
 //        Button("Show Sheet") {
 //            self.showingSheet.toggle()
 //        }
@@ -61,9 +72,9 @@ struct ContentView: View {
 //        }
     }
     
-    func removeRows(at offsets: IndexSet) {
-        numbers.remove(atOffsets: offsets)
-    }
+//    func removeRows(at offsets: IndexSet) {
+//        numbers.remove(atOffsets: offsets)
+//    }
 }
 
 struct ContentView_Previews: PreviewProvider {
